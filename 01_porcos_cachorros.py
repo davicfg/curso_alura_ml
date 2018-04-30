@@ -14,13 +14,24 @@ marcacoes = [1, 1, 1, -1, -1, -1]
 
 misterioso1 = [1, 1, 1]
 misterioso2 = [1, 0, 0]
+misterioso3 = [0, 0, 1]
+teste = [misterioso1, misterioso2, misterioso3]
+r_esperado = [-1, 1, -1]
 
-teste = [misterioso1, misterioso2]
 from sklearn.naive_bayes import MultinomialNB
 
 modelo = MultinomialNB()
 modelo.fit(dados, marcacoes)
 
-print(modelo.predict(teste));
 
+resultado = modelo.predict(teste);
+
+diferencas = resultado - r_esperado
+acertos = [d for d in diferencas if d==0]
+total_acertos = len(acertos)
+total_elementos = len(teste)
+
+taxa_acerto = 100.0 * total_acertos/total_elementos
+
+print(taxa_acerto)
 
